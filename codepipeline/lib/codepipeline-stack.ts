@@ -33,7 +33,7 @@ export class CodepipelineStack extends cdk.Stack {
     const gitOwner = "opensearch-project";
     const gitRepo = "oui";
     const gitBranch = "main";
-    const gitArn = "XXXXX" // ASK OWNER
+    const gitArn = this.node.tryGetContext('codestar')
     const codePipelineServiceRoleSuffix = 'CodePipelineRole';
     const codePipelineID = 'CodePipeline';
     const codePipelineServiceRoleName = `${prefix}-pipeline-service-role`;
@@ -357,10 +357,9 @@ export class CodepipelineStack extends cdk.Stack {
     ruleForCheck.addTarget(new LambdaFunction(CronLambdaFunction));
 
     /** Invoke cronlambda for the first time when stack is deployed */
-    // (async function () { // wait till codepipeline gets created
-    //   await sleep(60000);
-    // })();
-
+    (async function () { // wait till codepipeline gets created
+      await sleep(60000);
+    })();
 
     const lambdaTrigger = new Cr.AwsCustomResource(this, 'CronLambdaTrigger', {
       policy: Cr.AwsCustomResourcePolicy.fromStatements([new IAM.PolicyStatement({
