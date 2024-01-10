@@ -10,8 +10,28 @@ function handler(event) {
 
     if (event.request.uri[0] !== '/') parts.unshift('');
 
+    // With /1.0, without a trailing `/`, the docs confuse baseURL
+    if (/^\d+\.\d+$/.test(parts[1]) && parts.length === 2) {
+        parts.push('');
+        return {
+            statusCode: 308,
+            statusDescription: 'Permanent Redirect',
+            headers: {
+                "location": {
+                    "value": parts.join('/')
+                },
+                "cache-control": {
+                    "value": "max-age=604800"
+                },
+            }
+        };
+    }
+
     if (!/^\d+\.\d+$/.test(parts[1]) && (!USE_LATEST || parts[1] !== 'latest')) {
         parts.splice(1, 0, USE_LATEST ? 'latest' : LATEST_VERSION);
+
+        // If landing only with domain name, add trailing '/'
+        if (parts.length === 2) parts.push('');
 
         return {
             statusCode: 307,
