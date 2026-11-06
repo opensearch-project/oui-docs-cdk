@@ -6,10 +6,10 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 
 | Maintainer     | GitHub ID                                 | Affiliation |
 | -------------- | ----------------------------------------- | ----------- |
-| Miki Barahmand | [AMoo-Miki](https://github.com/AMoo-Miki) | Amazon      |
 
 ## Emeritus
 
 | Maintainer    | GitHub ID                               | Affiliation |
 | ------------- | --------------------------------------- | ----------- |
 | Kartik Desai  | [kaddy645](https://github.com/kaddy645) | Amazon      |
+| Miki Barahmand | [AMoo-Miki](https://github.com/AMoo-Miki) | Amazon |
